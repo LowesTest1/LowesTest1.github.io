@@ -1,0 +1,2939 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Article Types</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://www.lowescdn.com/scaffold/1.2.0/css/scaffold.min.css">
+    <script src="http://www.lowescdn.com/scaffold/1.2.0/js/scaffold.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.js"></script>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        text-decoration: none;
+        list-style: none;
+    }
+    
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1032px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    .row {
+        box-sizing: border-box;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    
+    .between {
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    
+    .col-sm {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        -ms-flex-preferred-size: 0;
+        flex-basis: 0;
+        max-width: 100%;
+        padding-right: 0.5em;
+        padding-left: 0.5em;
+    }
+    
+    .col-sm-1-5 {
+        -ms-flex-preferred-size: 20%;
+        flex-basis: 20%;
+        max-width: 20%;
+    }
+    
+    .col-sm-2-5 {
+        -ms-flex-preferred-size: 40%;
+        flex-basis: 40%;
+        max-width: 40%;
+    }
+    
+    .col-sm-3-5 {
+        -ms-flex-preferred-size: 60%;
+        flex-basis: 60%;
+        max-width: 60%;
+    }
+    
+    button {
+        width: 100%;
+        padding: 0.5rem;
+        text-transform: uppercase;
+        background-color: #0041c2;
+        border: none;
+        font-weight: 700;
+        font-size: 14px;
+        color: white;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+    }
+    
+    .mt10 {
+        margin-top: 24px;
+    }
+    
+    .p10 {
+        padding: 10px;
+    }
+    
+    .content-type-title {
+        margin-left: 24px;
+    }
+    
+    .hero-container {
+        position: relative;
+        margin-top: 10px;
+    }
+    
+    .hero-image {
+        max-width: 100%;
+        padding: 0 26px;
+    }
+    
+    .hero-overlay-text {
+        color: #fff;
+        position: absolute;
+        padding: 30px;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 25px;
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), #000 100%);
+        flex-basis: 40%;
+        max-width: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .hero-overlay-text p {
+        line-height: 1.6;
+        color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 75ch;
+    }
+    
+    .topics-div {
+        display: block;
+        padding-left: 20px;
+    }
+    
+    .topics-div a {
+        color: #0471AF;
+    }
+    
+    .topic-title {
+        padding: 3px 10px 0 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .topic-title .icon-filter {
+        position: relative;
+        top: 3px;
+        padding-right: 5px;
+    }
+    
+    .topics-btn {
+        color: #fff;
+        background-color: #0471AF;
+        padding: 10px;
+        margin-top: 30px;
+    }
+    
+    .show-sort-div {
+        display: block;
+        background-color: #e5e5e5;
+        padding: 10px;
+        margin: 0 10px;
+    }
+    
+    .showItemNum {
+        padding-top: 4px;
+    }
+    
+    .select-sortby-dropdown-div:before {
+        content: 'Sort By';
+        padding-right: 10px;
+    }
+    
+    .select-sortby-dropdown-div .icon-arrow-down {
+        margin-left: -30px;
+        pointer-events: none;
+    }
+    
+    .select-sortby {
+        padding: 10px;
+        border: none;
+        box-shadow: none;
+        -webkit-appearance: none;
+        font-size: 14px;
+        width: 50%;
+        background-color: #fff;
+        border-radius: 0;
+    }
+    
+    .show-sort-div-mobile {
+        display: none;
+    }
+    /* articles css starts */
+    
+    .topic_tag {
+        padding: 10px 0 0;
+    }
+    
+    .article_container {
+        width: calc(104% - 10px);
+        padding-top: 10px;
+    }
+    
+    .article_title {
+        width: auto;
+        color: rgb(51, 51, 51);
+        font-size: 20px;
+        /* font-family: DINNext-Medium; */
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 28px;
+    }
+    
+    .article_item {
+        padding-right: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        /* flex: 1; */
+        max-width: calc(100%/3);
+    }
+    
+    .article_image {
+        width: 100%;
+        height: auto;
+    }
+    
+    .article_container_margin {
+        margin-left: 13.33%;
+    }
+    
+    .pagination {
+        text-align: center;
+        margin-top: 45px;
+    }
+    
+    .pagination a {
+        color: #0471af;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }
+    
+    .pagination a.active {
+        background-color: #03517d;
+        color: white;
+    }
+    /*   
+    .pagination a:hover:not(.active) {
+        background-color: #ddd;
+    } */
+    
+    .pagination a:hover {
+        background: #03517d;
+        color: #FFF;
+    }
+    
+    .load-more {
+        display: none;
+    }
+    /* articles css ends */
+    
+    @media only screen and (max-width: 768px) {
+        .hero-overlay-text {
+            bottom: 2px;
+            background: #000;
+            height: auto;
+            top: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            max-width: calc(100% - 50px)
+        }
+        .topics-div {
+            display: none;
+        }
+        .refine-div {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e5e5e5;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .refine-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .done-btn {
+            color: #fff;
+            background-color: #0471AF;
+            padding: 10px 20px;
+            width: auto;
+            margin-bottom: 0;
+        }
+        .show-sort-div {
+            display: none;
+        }
+        .show-sort-div-mobile {
+            display: block;
+            width: 100%;
+        }
+        .sort-btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .sort-by-btn-style {
+            color: #fff;
+            font-size: 20px;
+            padding: 16px;
+            background-color: #0471AF;
+        }
+        .sort-by-title {
+            margin-left: 10px;
+        }
+        .sort-btn {
+            padding: 10px 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: solid 1px #e5e5e5;
+        }
+        .selected-sort-btn {
+            background-color: #e5e5e5;
+        }
+        input[type='radio'][name='selected-sort-btn'] {
+            display: none;
+        }
+        .sort-btn-label {
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            width: 10em;
+            text-align: center;
+            margin: 10px;
+        }
+        /* css to highlight the selected button */
+        /* input[type='radio'][name='selected-sort-btn']:checked+label {
+            border: 2px solid #0471AF;
+        } */
+        .selected-button {
+            border: 2px solid #0471AF;
+        }
+        .show-div {
+            display: block;
+            background-color: #fff;
+            /* //transparent color for testing */
+            /* background-color: rgba(0, 0, 0, .5); */
+        }
+        .article_item {
+            min-width: 98%;
+            display: inline-flex;
+            border-bottom: 1px solid #CCC;
+            padding: 10px 20px 26px 0;
+        }
+        .article_item a {
+            min-width: 50%;
+            max-width: 50%;
+        }
+        .article_title {
+            width: 100%;
+        }
+        .article_image {
+            object-fit: contain;
+        }
+        .article_title_container {
+            padding-left: 20px;
+        }
+        .topic_tag {
+            padding-top: 0;
+        }
+        .pagination {
+            display: none;
+        }
+        .load-more {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .hide {
+            display: none !important;
+        }
+    }
+</style>
+
+<body>
+    <script>
+        $(function() {
+            var currentPage = 1;
+            var articlesNumInAPage = 21; // num of articles/images per page
+            var skip = totalCount = totalPage = 0;
+            var template = $('#article-type').html(); //HTML template where the entire DOM will be rendered to
+            var templateScript = sortParameter = '';
+
+            // Temp local data
+            var context = {
+                "contentType": "How To's",
+                "hero-image": "https://www.gannett-cdn.com/presto/2019/02/14/PLSJ/1a6b471c-abd5-4fb0-9f10-2af5d" +
+                    "d3b3096-Home_Builder_WEB.jpg?crop=1999,1118,x0,y0&width=3200&height=1680&fit=bou" +
+                    "nds",
+                "hero-link": "https://www.lowes.com",
+                "hero-imageText": "Lorem ipsum dolor sit amet, eu agam wisi meis vis, cum cu dicit principes.Ne dol" +
+                    "ore semper per, et tacimates ocurreret similique mei.Has cu iuvaret voluptua sus" +
+                    "cipiantur, epicurei persecuti ad sed.Et quo debet vituperata.Mel tota meliore et" +
+                    ".Case graeci sanctus no duo, lucilius inimicus aliquando vim in , nullam fabulas" +
+                    "scriptorem ex pro.",
+                "topics": [{
+                    id: 1,
+                    name: 'How To'
+                }, {
+                    id: 2,
+                    name: 'Buying Guides'
+                }, {
+                    id: 3,
+                    name: 'Inspiration'
+                }, {
+                    id: 4,
+                    name: 'Calculation'
+                }],
+                "articleData": [{
+                    "pageTitle": "9 Tips for a Dry Basement",
+                    "pagePath": "content/lowes/en_us/npc/how-to/tips-dry-basement",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_tips-basement-dry-hero",
+                    "articleImageAltText": "Basement",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Build a Deck Box",
+                    "pagePath": "content/lowes/en_us/npc/how-to/deck-box",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_deck-box-hero",
+                    "articleImageAltText": "A video overview of how to build a deck storage box.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2013-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Decking and Deck Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-decking-and-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-decking-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite decking and deck railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2012-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-stairs-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite stairs and stair railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2011-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Design and Layout",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-design-and-layout",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-design-and-layout-hero",
+                    "articleImageAltText": "A video explaining how to design a wood or composite deck and lay out the project.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2010-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Post Holes and Deck Framing",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-post-holes-and-framing",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-post-holes-and-framing-hero",
+                    "articleImageAltText": "A video demonstrating how to dig post holes, set posts and build the frame for a deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Upgrade Your Deck and Add Finishing Touches",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-finishing-touches",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-upgrade-and-finishing-touches-hero",
+                    "articleImageAltText": "A video showing different ways to add upgrades to wood and composite decks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Decking and Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-decking-and-railings",
+                    "articleImage": "https://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-decking-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install decking and deck rails on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "properties:orientation",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-stairs-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install stairs and stair railings on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Fire Pit",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-fire-pit",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_build-a-fire-pit-hero",
+                    "articleImageAltText": "Fire pit.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Raised Garden Bed",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-build-a-raised-garden-bed",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-raised-garden-bed-hero",
+                    "articleImageAltText": "A video demonstrating how to build a raised garden bed and how to add soil and plants.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Retaining Wall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-block-retaining-wall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-retaining-wall-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and build a retaining wall with retaining wall blocks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Patio",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-patio",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-patio-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a patio with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-walkway-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a walkway with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Hang Heavy Mirrors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-hang-heavy-mirrors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-hang-heavy-mirrors-hero",
+                    "articleImageAltText": "A video demonstrating how to hang heavy mirrors and pictures on a wall.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install a Tile Backsplash",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-a-tile-backsplash",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-a-tile-backsplash-hero",
+                    "articleImageAltText": "A video demonstrating how to install a tile kitchen backsplash.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install Vinyl Plank Flooring",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-vinyl-plank-flooring",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-vinyl-plank-flooring-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a vinyl plank floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Lay Tile: DIY Floor Tile Installation",
+                    "pagePath": "content/lowes/en_us/npc/how-to/install-floor-tile",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-lay-tile-floor-tile-installation-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a tile floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Patch and Repair Drywall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/patch-and-repair-drywall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-patch-and-repair-drywall-hero",
+                    "articleImageAltText": "A video demonstrating how to fix different types and sizes of drywall damage.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Lawn Grub Control",
+                    "pagePath": "content/lowes/en_us/npc/how-to/lawn-grub-control",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_lawn-grub-control-hero",
+                    "articleImageAltText": "Lawn Grub.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Planning for a Paver Patio or Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/planning-for-a-paver-patio-or-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_planning-for-a-paver-patio-or-walkway-hero",
+                    "articleImageAltText": "Paving Stone Walkway.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-03-13T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Replace a Refrigerator Water Filter ",
+                    "pagePath": "content/lowes/en_us/npc/how-to/replace-a-refrigerator-water-filter",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_replace-a-refrigerator-water-filter-hero",
+                    "articleImageAltText": "replace a refrigerator water filter",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Store and Dispose of Paint Properly",
+                    "pagePath": "content/lowes/en_us/npc/how-to/store-dispose-paint-properly",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_store-dispose-paint-properly-hero",
+                    "articleImageAltText": "Paint Cans",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Understand Frost and Freeze Dates",
+                    "pagePath": "content/lowes/en_us/npc/how-to/understand-frost-and-freeze-dates",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "orange marigold with frosty petals",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Design and Build a Deck",
+                    "pagePath": "content/lowes/en_us/npc/how-to/design-and-build-a-deck",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Read a Paint Color Chip Display",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-read-a-paint-color-chip-display",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "9 Tips for a Dry Basement",
+                    "pagePath": "content/lowes/en_us/npc/how-to/tips-dry-basement",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_tips-basement-dry-hero",
+                    "articleImageAltText": "Basement",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Build a Deck Box",
+                    "pagePath": "content/lowes/en_us/npc/how-to/deck-box",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_deck-box-hero",
+                    "articleImageAltText": "A video overview of how to build a deck storage box.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Decking and Deck Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-decking-and-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-decking-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite decking and deck railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-stairs-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite stairs and stair railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Design and Layout",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-design-and-layout",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-design-and-layout-hero",
+                    "articleImageAltText": "A video explaining how to design a wood or composite deck and lay out the project.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-03-15T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Post Holes and Deck Framing",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-post-holes-and-framing",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-post-holes-and-framing-hero",
+                    "articleImageAltText": "A video demonstrating how to dig post holes, set posts and build the frame for a deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-04-17T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Upgrade Your Deck and Add Finishing Touches",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-finishing-touches",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-upgrade-and-finishing-touches-hero",
+                    "articleImageAltText": "A video showing different ways to add upgrades to wood and composite decks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-05-15T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Decking and Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-decking-and-railings",
+                    "articleImage": "https://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-decking-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install decking and deck rails on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "properties:orientation",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-06-16T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-stairs-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install stairs and stair railings on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Fire Pit",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-fire-pit",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_build-a-fire-pit-hero",
+                    "articleImageAltText": "Fire pit.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Raised Garden Bed",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-build-a-raised-garden-bed",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-raised-garden-bed-hero",
+                    "articleImageAltText": "A video demonstrating how to build a raised garden bed and how to add soil and plants.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Retaining Wall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-block-retaining-wall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-retaining-wall-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and build a retaining wall with retaining wall blocks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Patio",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-patio",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-patio-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a patio with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-walkway-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a walkway with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Hang Heavy Mirrors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-hang-heavy-mirrors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-hang-heavy-mirrors-hero",
+                    "articleImageAltText": "A video demonstrating how to hang heavy mirrors and pictures on a wall.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install a Tile Backsplash",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-a-tile-backsplash",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-a-tile-backsplash-hero",
+                    "articleImageAltText": "A video demonstrating how to install a tile kitchen backsplash.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install Vinyl Plank Flooring",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-vinyl-plank-flooring",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-vinyl-plank-flooring-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a vinyl plank floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Lay Tile: DIY Floor Tile Installation",
+                    "pagePath": "content/lowes/en_us/npc/how-to/install-floor-tile",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-lay-tile-floor-tile-installation-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a tile floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Patch and Repair Drywall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/patch-and-repair-drywall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-patch-and-repair-drywall-hero",
+                    "articleImageAltText": "A video demonstrating how to fix different types and sizes of drywall damage.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Lawn Grub Control",
+                    "pagePath": "content/lowes/en_us/npc/how-to/lawn-grub-control",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_lawn-grub-control-hero",
+                    "articleImageAltText": "Lawn Grub.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Planning for a Paver Patio or Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/planning-for-a-paver-patio-or-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_planning-for-a-paver-patio-or-walkway-hero",
+                    "articleImageAltText": "Paving Stone Walkway.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Replace a Refrigerator Water Filter ",
+                    "pagePath": "content/lowes/en_us/npc/how-to/replace-a-refrigerator-water-filter",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_replace-a-refrigerator-water-filter-hero",
+                    "articleImageAltText": "replace a refrigerator water filter",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Store and Dispose of Paint Properly",
+                    "pagePath": "content/lowes/en_us/npc/how-to/store-dispose-paint-properly",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_store-dispose-paint-properly-hero",
+                    "articleImageAltText": "Paint Cans",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Understand Frost and Freeze Dates",
+                    "pagePath": "content/lowes/en_us/npc/how-to/understand-frost-and-freeze-dates",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "orange marigold with frosty petals",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Design and Build a Deck",
+                    "pagePath": "content/lowes/en_us/npc/how-to/design-and-build-a-deck",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Read a Paint Color Chip Display",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-read-a-paint-color-chip-display",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "9 Tips for a Dry Basement",
+                    "pagePath": "content/lowes/en_us/npc/how-to/tips-dry-basement",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_tips-basement-dry-hero",
+                    "articleImageAltText": "Basement",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Build a Deck Box",
+                    "pagePath": "content/lowes/en_us/npc/how-to/deck-box",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_deck-box-hero",
+                    "articleImageAltText": "A video overview of how to build a deck storage box.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Decking and Deck Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-decking-and-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-decking-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite decking and deck railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-stairs-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite stairs and stair railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Design and Layout",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-design-and-layout",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-design-and-layout-hero",
+                    "articleImageAltText": "A video explaining how to design a wood or composite deck and lay out the project.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Post Holes and Deck Framing",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-post-holes-and-framing",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-post-holes-and-framing-hero",
+                    "articleImageAltText": "A video demonstrating how to dig post holes, set posts and build the frame for a deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Upgrade Your Deck and Add Finishing Touches",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-finishing-touches",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-upgrade-and-finishing-touches-hero",
+                    "articleImageAltText": "A video showing different ways to add upgrades to wood and composite decks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Decking and Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-decking-and-railings",
+                    "articleImage": "https://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-decking-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install decking and deck rails on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "properties:orientation",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-stairs-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install stairs and stair railings on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Fire Pit",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-fire-pit",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_build-a-fire-pit-hero",
+                    "articleImageAltText": "Fire pit.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Raised Garden Bed",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-build-a-raised-garden-bed",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-raised-garden-bed-hero",
+                    "articleImageAltText": "A video demonstrating how to build a raised garden bed and how to add soil and plants.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-03-14T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Retaining Wall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-block-retaining-wall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-retaining-wall-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and build a retaining wall with retaining wall blocks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-02-19T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Patio",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-patio",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-patio-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a patio with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-walkway-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a walkway with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Hang Heavy Mirrors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-hang-heavy-mirrors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-hang-heavy-mirrors-hero",
+                    "articleImageAltText": "A video demonstrating how to hang heavy mirrors and pictures on a wall.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install a Tile Backsplash",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-a-tile-backsplash",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-a-tile-backsplash-hero",
+                    "articleImageAltText": "A video demonstrating how to install a tile kitchen backsplash.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install Vinyl Plank Flooring",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-vinyl-plank-flooring",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-vinyl-plank-flooring-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a vinyl plank floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Lay Tile: DIY Floor Tile Installation",
+                    "pagePath": "content/lowes/en_us/npc/how-to/install-floor-tile",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-lay-tile-floor-tile-installation-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a tile floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Patch and Repair Drywall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/patch-and-repair-drywall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-patch-and-repair-drywall-hero",
+                    "articleImageAltText": "A video demonstrating how to fix different types and sizes of drywall damage.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Lawn Grub Control",
+                    "pagePath": "content/lowes/en_us/npc/how-to/lawn-grub-control",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_lawn-grub-control-hero",
+                    "articleImageAltText": "Lawn Grub.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Planning for a Paver Patio or Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/planning-for-a-paver-patio-or-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_planning-for-a-paver-patio-or-walkway-hero",
+                    "articleImageAltText": "Paving Stone Walkway.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Replace a Refrigerator Water Filter ",
+                    "pagePath": "content/lowes/en_us/npc/how-to/replace-a-refrigerator-water-filter",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_replace-a-refrigerator-water-filter-hero",
+                    "articleImageAltText": "replace a refrigerator water filter",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-03-22T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Store and Dispose of Paint Properly",
+                    "pagePath": "content/lowes/en_us/npc/how-to/store-dispose-paint-properly",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_store-dispose-paint-properly-hero",
+                    "articleImageAltText": "Paint Cans",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-02-22T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Understand Frost and Freeze Dates",
+                    "pagePath": "content/lowes/en_us/npc/how-to/understand-frost-and-freeze-dates",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "orange marigold with frosty petals",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-01-22T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Design and Build a Deck",
+                    "pagePath": "content/lowes/en_us/npc/how-to/design-and-build-a-deck",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Read a Paint Color Chip Display",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-read-a-paint-color-chip-display",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "9 Tips for a Dry Basement",
+                    "pagePath": "content/lowes/en_us/npc/how-to/tips-dry-basement",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_tips-basement-dry-hero",
+                    "articleImageAltText": "Basement",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Build a Deck Box",
+                    "pagePath": "content/lowes/en_us/npc/how-to/deck-box",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_deck-box-hero",
+                    "articleImageAltText": "A video overview of how to build a deck storage box.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Decking and Deck Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-decking-and-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-decking-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite decking and deck railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Composite Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-composite-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-composite-stairs-and-railings-hero",
+                    "articleImageAltText": "A video showing steps for installing composite stairs and stair railings on a composite deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Design and Layout",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-design-and-layout",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-design-and-layout-hero",
+                    "articleImageAltText": "A video explaining how to design a wood or composite deck and lay out the project.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Post Holes and Deck Framing",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-post-holes-and-framing",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-post-holes-and-framing-hero",
+                    "articleImageAltText": "A video demonstrating how to dig post holes, set posts and build the frame for a deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Upgrade Your Deck and Add Finishing Touches",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-finishing-touches",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-upgrade-and-finishing-touches-hero",
+                    "articleImageAltText": "A video showing different ways to add upgrades to wood and composite decks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-03-16T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Decking and Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-decking-and-railings",
+                    "articleImage": "https://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-decking-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install decking and deck rails on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "properties:orientation",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Deck: Wood Stairs and Stair Railings",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-deck-wood-stairs-and-stair-railings",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-deck-wood-stairs-and-railings-hero",
+                    "articleImageAltText": "A video demonstrating how to install stairs and stair railings on a wood deck.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Fire Pit",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-fire-pit",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_build-a-fire-pit-hero",
+                    "articleImageAltText": "Fire pit.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Raised Garden Bed",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-build-a-raised-garden-bed",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-raised-garden-bed-hero",
+                    "articleImageAltText": "A video demonstrating how to build a raised garden bed and how to add soil and plants.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-07-02T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Build a Retaining Wall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/build-a-block-retaining-wall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-build-a-retaining-wall-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and build a retaining wall with retaining wall blocks.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Patio",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-patio",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-patio-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a patio with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Design and Build a Paver Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-design-and-build-a-paver-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-design-and-build-a-paver-walkway-hero",
+                    "articleImageAltText": "A video demonstrating how to design and build a walkway with pavers.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Hang Heavy Mirrors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-hang-heavy-mirrors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-hang-heavy-mirrors-hero",
+                    "articleImageAltText": "A video demonstrating how to hang heavy mirrors and pictures on a wall.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install a Tile Backsplash",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-a-tile-backsplash",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-a-tile-backsplash-hero",
+                    "articleImageAltText": "A video demonstrating how to install a tile kitchen backsplash.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Install Vinyl Plank Flooring",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-install-vinyl-plank-flooring",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-install-vinyl-plank-flooring-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a vinyl plank floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Lay Tile: DIY Floor Tile Installation",
+                    "pagePath": "content/lowes/en_us/npc/how-to/install-floor-tile",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-lay-tile-floor-tile-installation-hero",
+                    "articleImageAltText": "A video demonstrating how to plan and install a tile floor.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Patch and Repair Drywall",
+                    "pagePath": "content/lowes/en_us/npc/how-to/patch-and-repair-drywall",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_how-to-patch-and-repair-drywall-hero",
+                    "articleImageAltText": "A video demonstrating how to fix different types and sizes of drywall damage.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Lawn Grub Control",
+                    "pagePath": "content/lowes/en_us/npc/how-to/lawn-grub-control",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_lawn-grub-control-hero",
+                    "articleImageAltText": "Lawn Grub.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Planning for a Paver Patio or Walkway",
+                    "pagePath": "content/lowes/en_us/npc/how-to/planning-for-a-paver-patio-or-walkway",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_planning-for-a-paver-patio-or-walkway-hero",
+                    "articleImageAltText": "Paving Stone Walkway.",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Replace a Refrigerator Water Filter ",
+                    "pagePath": "content/lowes/en_us/npc/how-to/replace-a-refrigerator-water-filter",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_replace-a-refrigerator-water-filter-hero",
+                    "articleImageAltText": "replace a refrigerator water filter",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Store and Dispose of Paint Properly",
+                    "pagePath": "content/lowes/en_us/npc/how-to/store-dispose-paint-properly",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_store-dispose-paint-properly-hero",
+                    "articleImageAltText": "Paint Cans",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Understand Frost and Freeze Dates",
+                    "pagePath": "content/lowes/en_us/npc/how-to/understand-frost-and-freeze-dates",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "orange marigold with frosty petals",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Design and Build a Deck",
+                    "pagePath": "content/lowes/en_us/npc/how-to/design-and-build-a-deck",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "How to Read a Paint Color Chip Display",
+                    "pagePath": "content/lowes/en_us/npc/how-to/how-to-read-a-paint-color-chip-display",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors AAAA",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2000-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors B",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2001-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors C",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2002-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors D",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2003-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors E",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2004-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors F",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors G",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2006-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors H",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2007-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors I",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2008-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors J",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2009-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors K",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2010-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors L",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2011-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors M",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2012-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors N",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2013-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors O",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2014-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors P",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2015-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors Q",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2016-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors R",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2017-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors S",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2018-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors T",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2019-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors U",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors V",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-02-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors W",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors X",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors Y",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-14T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors Z",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors BB",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-07-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors CC",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-08-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors DD",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-09-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors EE",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-10-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors FF",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-11-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors GG",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-12-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors HH",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2006-01-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors II",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2006-03-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors JJ",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2006-04-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors KK",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2006-05-19T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors LL",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2007-06-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors MM",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "200-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors NN",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors OO",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors PP",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }, {
+                    "pageTitle": "Modern Sliding Barn Doors",
+                    "pagePath": "content/lowes/en_us/npc/how-to/sliding-doors",
+                    "articleImage": "http://lda.lowes.com/is/image/Lowes/ht_understanding-frost-and-freeze-dates.jpg",
+                    "articleImageAltText": "",
+                    "contentType": "how-to",
+                    "primaryTag": "",
+                    "secondaryTag": "",
+                    "lastReplicationAction": "",
+                    "lastReplicatedDate": "2005-05-12T13:37:27+00:00"
+                }],
+                paginateArray: [],
+                totalPage: '',
+                contextCurrentPage: '',
+            }
+            totalPage = context.articleData.length / articlesNumInAPage;
+
+            // *** Handlebar.registerHelper *** //
+            Handlebars.registerHelper('times', function(n, block) {
+                var row = '';
+                for (var i = 1; i <= n; ++i) {
+                    block.data.index = i;
+                    block.data.first = i === 0;
+                    block.data.last = i === (n - 1);
+                    row += block.fn(this);
+                }
+                return row;
+            });
+
+            // Handlebar compare operator : 
+            // https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional?noredirect=1&lq=1
+            Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
+                switch (operator) {
+                    case '==':
+                        return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                    case '===':
+                        return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                    case '!=':
+                        return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                    case '!==':
+                        return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+                    case '<':
+                        return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                    case '<=':
+                        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                    case '>':
+                        return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                    case '>=':
+                        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                    case '&&':
+                        return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                    case '||':
+                        return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                    default:
+                        return options.inverse(this);
+                }
+            });
+
+            Handlebars.registerHelper('topicList', function(items, options) {
+                let out = "<ul>";
+                for (let i = 0, l = items.length; i < l; i++) {
+                    out = out + "<li class='p10'>" + options.fn(items[i]) + "</li>";
+                }
+                return out + "</ul>";
+            });
+            // *** End of Handlebar.registerHelper *** //
+
+            // *** Pagination code *** //
+            function createPaginationArray() {
+                context.pageNumberArray = [];
+                if (context.totalPage <= 5) {
+                    for (var i = 0; i < 5; i++) {
+                        context.pageNumberArray.push({
+                            id: i,
+                            value: i
+                        });
+                    }
+                } else {
+                    var firstPage = 1;
+                    var lastPage = context.totalPage;
+                    if (context.contextCurrentPage == 1) {
+                        context.pageNumberArray.push({
+                            id: firstPage,
+                            value: firstPage
+                        }, {
+                            id: firstPage + 1,
+                            value: firstPage + 1
+                        }, {
+                            id: firstPage + 2,
+                            value: firstPage + 2
+                        }, {
+                            id: 0,
+                            value: '...'
+                        }, {
+                            id: lastPage,
+                            value: lastPage
+                        })
+                        return;
+                    }
+
+                    context.pageNumberArray.push({
+                        id: firstPage,
+                        value: firstPage
+                    })
+
+                    if (context.contextCurrentPage >= 5) {
+                        context.pageNumberArray.push({
+                            id: 0,
+                            value: '...'
+                        })
+                    }
+
+                    if (context.contextCurrentPage - firstPage == 3) {
+                        context.pageNumberArray.push({
+                            id: context.contextPrevPage - 1,
+                            value: context.contextPrevPage - 1
+                        })
+                    }
+
+                    if (context.contextPrevPage != firstPage) {
+                        context.pageNumberArray.push({
+                            id: context.contextPrevPage,
+                            value: context.contextPrevPage
+                        })
+                    }
+
+                    context.pageNumberArray.push({
+                        id: context.contextCurrentPage,
+                        value: context.contextCurrentPage
+                    })
+
+                    if (context.contextCurrentPage < context.totalPage - 1) {
+                        context.pageNumberArray.push({
+                            id: context.contextNextPage,
+                            value: context.contextNextPage
+                        })
+                    }
+
+                    if (context.totalPage - context.contextCurrentPage >= 3) {
+                        context.pageNumberArray.push({
+                            id: 0,
+                            value: '...'
+                        })
+                    }
+
+                    if (context.contextCurrentPage < context.totalPage) {
+                        context.pageNumberArray.push({
+                            id: lastPage,
+                            value: lastPage
+                        })
+                    }
+                }
+            }
+
+            // Loads articles when the page number is changed
+            function changePageContent() {
+                totalCount = context.articleData.length;
+                totalPage = totalCount / articlesNumInAPage;
+                context.paginateArray.length = 0;
+                context.totalPage = Math.ceil(totalCount / articlesNumInAPage);
+                context.paginateArray = context.articleData.slice(skip, skip + articlesNumInAPage);
+                context.contextCurrentPage = currentPage;
+                context.contextNextPage = currentPage + 1;
+                context.contextPrevPage = currentPage - 1;
+
+                createPaginationArray();
+                compileAndRenderDesktop();
+            }
+
+            // Sets current pages to Page 1
+            function changePageContentToFirstPage() {
+                totalCount = context.articleData.length;
+                totalPage = totalCount / articlesNumInAPage;
+                context.paginateArray.length = 0;
+                context.totalPage = Math.ceil(totalCount / articlesNumInAPage);
+                context.paginateArray = context.articleData.slice(skip, skip + articlesNumInAPage);
+
+                // console.log("totalCount " + totalCount)
+
+                // Current Pages set to page 1 so the next button is enabled
+                context.contextCurrentPage = '1';
+                currentPage = '1';
+
+                createPaginationArray();
+                compileAndRenderAfterSort();
+            }
+
+            // Updates displayed articles when pagination numbers are clicked 
+            function setPageConfig(clickedPageNumber) {
+                currentPage = clickedPageNumber;
+                skip = articlesNumInAPage * (clickedPageNumber - 1);
+                changePageContent();
+            }
+
+            // Resets page into first page
+            function setPageToFirstPage(clickedPageNum) {
+                currentPage = clickedPageNum;
+                skip = 0;
+                changePageContentToFirstPage();
+            }
+
+            // *** Previous (<) Button  *** //
+            $(document).on('click', '[data-control=prevPaginationBtn]', function() {
+                if (context.contextCurrentPage > 1 && context.contextCurrentPage < totalCount) {
+                    var beforeNextClicked = currentPage;
+                    currentPage--;
+                    //Sets up the correct num of skip by removing 2 * articlesNumInAPage ***TO REVIEW LATER ***
+                    skip = articlesNumInAPage * beforeNextClicked - (2 * articlesNumInAPage);
+                    changePageContent();
+                    articleCountDisplay();
+
+                } else {
+                    return;
+                }
+            });
+
+            // *** Next (>) Button  *** //
+            $(document).on('click', '[data-control=nextPaginationBtn]', function() {
+                if (context.contextCurrentPage < context.totalPage) {
+                    var beforeNextClicked = currentPage;
+                    currentPage++;
+                    skip = articlesNumInAPage * beforeNextClicked;
+                    changePageContent();
+                    articleCountDisplay();
+                } else {
+                    return;
+                }
+            });
+            // *** Pagination code ends *** //
+
+
+            // *** Desktop View functionalities *** //
+            // Shows current number of articles displayed in "Showing # of # "
+            function articleCountDisplay() {
+                let articlesCount = (skip + 1) + " - " + (skip + articlesNumInAPage);
+                let articlesCountLastPage = (skip + 1) + " - " + totalCount;
+
+                if ((skip + articlesNumInAPage) < totalCount) {
+                    $('#article-count').text("Showing " + articlesCount + " of " + totalCount);
+                } else {
+                    $('#article-count').text("Showing " + articlesCountLastPage + " of " + totalCount);
+                }
+            }
+            // function calls when pagination buttons are called
+            $(document).on('click', '[data-control=paginationBtn]', function() {
+                setPageConfig($(this).data("id"));
+                articleCountDisplay();
+            });
+
+            // default render when desktop view is loaded
+            function compileAndRenderDesktop() {
+                var templateScript = Handlebars.compile(template);
+                var html = templateScript(context);
+                $(document.body).html(html);
+
+                // Updates the articles list according to sort parameters in desktop view
+                $("div.select-sortby-dropdown-div select").val(sortParameter);
+
+                // Highlights the current page number with blue background
+                $('#page-' + currentPage).addClass('active');
+            }
+
+            // render view after a sort param is selected: sets up page to 1 && highlights page num 1
+            function compileAndRenderAfterSort() {
+                var templateScript = Handlebars.compile(template);
+                var html = templateScript(context);
+                $(document.body).html(html);
+                $("div.select-sortby-dropdown-div select").val(sortParameter);
+
+                // Sets current page to 1 after sort parameter has changed
+                currentPage = '1';
+                // Highlights the current page number with blue background
+                $('#page-' + currentPage).addClass('active');
+            }
+
+            // Sort Articles in desktop view
+            function sortArticles(defaultSort) {
+                sortParameter = defaultSort ? defaultSort : document.getElementById("article-sort").value;
+                switch (sortParameter) {
+                    case 'titleAZ':
+                        context.articleData.sort(function(a, b) {
+                            return a.pageTitle.localeCompare(b.pageTitle);
+                        });
+                        break;
+                    case 'titleZA':
+                        context.articleData.sort(function(a, b) {
+                            return b.pageTitle.localeCompare(a.pageTitle);
+                        });
+                        break;
+                    case 'newest':
+                        context.articleData.sort(function(a, b) {
+                            return new Date(b.lastReplicatedDate) - new Date(a.lastReplicatedDate);
+                        });
+                        break;
+                }
+            }
+
+            // Sorts articles when parameters are changed in select dropdown
+            $(document).on('change', '[data-control=select-article-sort]', function() {
+                sortArticles();
+                changePageContentToFirstPage();
+                compileAndRenderAfterSort();
+                setPageToFirstPage('1');
+            });
+
+            // Desktop Function calls on page load
+            sortArticles('titleAZ');
+            changePageContent();
+
+            // *** End of Desktop View functionalities *** //
+
+
+            // *** Mobile View functionalities *** //
+            // Sort Articles in Mobile View
+            function sortArticlesMobile(defaultSort) {
+                sortParameter = defaultSort ? defaultSort : $(":radio[name='selected-sort-btn']:checked").val();
+
+                // console.log(context.articleData);
+                // console.log(context.paginateArray);
+
+                context.paginateArray = context.articleData;
+                // console.log(context.totalPage);
+
+                switch (sortParameter) {
+                    case 'titleAZ':
+                        context.paginateArray.sort(function(a, b) {
+                            return a.pageTitle.localeCompare(b.pageTitle);
+                        });
+                        break;
+                    case 'titleZA':
+                        context.paginateArray.sort(function(a, b) {
+                            return b.pageTitle.localeCompare(a.pageTitle);
+                        });
+                        break;
+                    case 'newest':
+                        context.paginateArray.sort(function(a, b) {
+                            return new Date(b.lastReplicatedDate) - new Date(a.lastReplicatedDate);
+                        });
+                        break;
+                }
+                let currentArticleNum = articlesNumInAPage;
+                context.paginateArray = context.articleData.slice(0, currentArticleNum);
+            }
+            // function calls when the sort button param is selected in Mobile View
+            $(document).on('change', ":radio[name='selected-sort-btn']", function() {
+                sortArticlesMobile();
+                compileAndRenderMobile();
+
+                // changePageContentToFirstPage();
+
+                //Keep the modal window open upon page refresh
+                $('.modal').addClass('show-div');
+
+                // Highlight the selected button with blue inside modal
+                switch (sortParameter) {
+                    case 'titleAZ':
+                        $('label[for="az"]').addClass('selected-button');
+                        break;
+                    case 'titleZA':
+                        $('label[for="za"]').addClass('selected-button');
+                        break;
+                    case 'newest':
+                        $('label[for="newest"]').addClass('selected-button');
+                        break;
+                }
+            });
+
+            // Load More Button: adds 21 more articles on button click
+            function loadMoreArticles() {
+                let currentArticleNum = articlesNumInAPage;
+
+                $(document).on('click', '#load-more-btn', function() {
+                    currentArticleNum += articlesNumInAPage;
+                    context.paginateArray = context.articleData.slice(0, currentArticleNum);
+                    compileAndRenderMobile();
+
+                    // Hides Load More button when the end of articles total is reached
+                    if (context.paginateArray.length == totalCount) {
+                        $('#load-more-btn').addClass('hide');
+                    }
+                    //Reloads page view when window is resized from mobile to desktop view
+                    $(window).resize(function() {
+                        if ($(window).width() > 786) {
+                            location.reload();
+                        }
+                    });
+                });
+            }
+
+            function compileAndRenderMobile() {
+                var templateScript = Handlebars.compile(template);
+                var html = templateScript(context);
+                $(document.body).html(html);
+            }
+
+            // Opens Modal
+            function openSortByModal() {
+                $(document).on('click', '#sort-by-btn', function() {
+                    $('.modal').addClass('show-div');
+                });
+            }
+
+            //Closes Modal
+            function closeModal() {
+                $(document).on('click', '.done-btn', function() {
+                    $('.modal').removeClass('show-div');
+                });
+            }
+
+            // Mobile View Function calls
+            sortArticlesMobile('titleAZ');
+            loadMoreArticles();
+            openSortByModal();
+            closeModal();
+            // *** End of Mobile View functionalities *** //
+
+        });
+    </script>
+    <script id="article-type" type="text/x-handlebars-template">
+
+        <div class="container">
+            <div class="row">
+                <h1 class="mt10 content-type-title">Article Type</h1>
+                <div class="hero-container">
+                    <a href={{hero-link}}><img class="hero-image" src={{ hero-image }} alt="hero image for content type" /></a>
+                    <div class="hero-overlay-text">
+                        <p>
+                            {{ hero-imageText }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt10">
+                <div class="row">
+                    <div class="col-sm-1-5 topics-div">
+                        <h2 class="topic-title"><i class="icon-filter" aria-hidden="true"></i>Refine</h2>
+                        <h3 class="topics-btn">Topics</h3>
+                        <ul>
+                            <a href="#" role="link">
+                                {{#topicList topics}}{{name}}{{/topicList}}
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="col-sm" id="showItemBar">
+                        <div class="container show-sort-div">
+                            <div class="row between">
+                                <h3 class="col-sm-3-5 showItemNum" id="article-count">
+                                    Showing 1-21 of {{articleData.length}}
+                                </h3>
+                                <div class="col-sm-2-5 select-sortby-dropdown-div">
+                                    <select class="select-sortby" id="article-sort" data-control="select-article-sort">
+                                        <option value="titleAZ">Title A-Z</option>
+                                        <option value="titleZA">Title Z-A</option>
+                                        <option value="newest">Newest</option>
+                                    </select>
+                                    <i class="icon-arrow-down" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="show-sort-div-mobile">
+                                <button id="sort-by-btn" class="btn btn-primary sort-by-btn-style" role="button">SORT BY</button>
+                            </div>
+                            <div class="row article_container">
+                                {{#each paginateArray}}
+                                <div class="article_item">
+                                    <a href={{this.pagePath}}>
+                                        <img class="article_image" src={{ this.articleImage }} alt="article image" />
+                                    </a>
+                                    <div class="article_title_container">
+                                        <p class="topic_tag">{{this.contentType}}</p>
+                                        <a href={{this.pagePath}}>
+                                            <h4 class="article_title">{{this.pageTitle}}</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                            <nav class="position-centered">
+                                <div class="pagination">
+                                    <ul aria-label="Page Menu" class="pagination" role="navigation">
+                                        {{#ifCond contextCurrentPage '==' 1}}
+                                        <li aria-disabled="true" class="page-previous disabled">
+                                            <a disabled="true" aria-disabled="true" href="#showItemBar" aria-label="Go to Previous Page" data-id="1" data-control="prevPaginationBtn">
+                                                <i aria-hidden="true" class="icon-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                        {{/ifCond}} {{#ifCond contextCurrentPage '>' 1}}
+                                        <li aria-disabled="true" class="page-previous">
+                                            <a disabled="true" aria-disabled="true" href="#showItemBar" aria-label="Go to Previous Page" data-id="1" data-control="prevPaginationBtn">
+                                                <i aria-hidden="true" class="icon-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                        {{/ifCond}} {{#each pageNumberArray}} {{#ifCond value '!=' '...'}}
+                                        <li>
+                                            <a href="#showItemBar" data-id="{{id}}" id="page-{{id}}" data-control="paginationBtn">{{value}}</a>
+                                        </li>
+                                        {{/ifCond}} {{#ifCond value '==' '...'}}
+                                        <li class="more">
+                                            <span><i aria-hidden="true" class="icon-dots"></i></span>
+                                        </li>
+                                        {{/ifCond}} {{/each}} {{#ifCond contextCurrentPage '!=' totalPage}}
+                                        <li class="page-next">
+                                            <a aria-label="Go to Next Page" href="#showItemBar" data-id="{{totalPage}}" data-control="nextPaginationBtn">
+                                                <i aria-hidden="true" class="icon-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                        {{/ifCond}} {{#ifCond contextCurrentPage '==' totalPage}}
+                                        <li class="page-next disabled">
+                                            <a aria-label="Go to Next Page" href="#showItemBar" data-id="{{totalPage}}" data-control="nextPaginationBtn">
+                                                <i aria-hidden="true" class="icon-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                        {{/ifCond}}
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="load-more">
+                                <button class="btn btn-primary" id="load-more-btn">Load More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal">
+                <div class="modal-body">
+                    <div class="sort-options-div">
+                        <div class="refine-div">
+                            <h3 class="refine-title">Refine</h3>
+                            <button class="done-btn" role="button">DONE</button>
+                        </div>
+                        <div>
+                            <h3 class="sort-by-title">Sort By</h3>
+                            <div class="sort-btn-container">
+                                <input type="radio" name="selected-sort-btn" value="titleAZ" id="az">
+                                <label class="sort-btn-label" for="az">Title A-Z</label>
+                                <input type="radio" name="selected-sort-btn" value="titleZA" id="za">
+                                <label class="sort-btn-label" for="za">Title Z-A</label>
+                                <input type="radio" name="selected-sort-btn" value="newest" id="newest">
+                                <label class="sort-btn-label" for="newest">Newest</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+</body>
+
+</html>
